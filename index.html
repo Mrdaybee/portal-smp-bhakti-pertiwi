@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portal SMP Bhakti Pertiwi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('theme');
+    if(!t) t = 'dark'; // Default ke Dark Mode Premium
+    document.documentElement.setAttribute('data-theme', t);
+  } catch(e){}
+})();
+</script>
+<style>
+/* =========================================
+   TEMA "DEEP NAVY & GOLD" (PREMIUM GLASS)
+   ========================================= */
+:root{
+  --bg:#030712; --bg-2:#0B1120;
+  --surface:rgba(17, 24, 39, 0.7); --surface-hover:rgba(31, 41, 55, 0.8);
+  --text:#F8FAFC; --muted:#94A3B8;
+  --border:rgba(255, 255, 255, 0.08);
+  --header-bg:rgba(3, 7, 18, 0.8);
+  --shadow:0 10px 30px -10px rgba(0,0,0,0.8);
+  --shadow-hover:0 20px 40px -10px rgba(0,0,0,0.9);
+  --ring:rgba(245, 158, 11, 0.4); 
+  
+  --gold:#F59E0B;
+  --gold-glow:rgba(245, 158, 11, 0.15);
+  --cyan:#06B6D4;
+  --cyan-glow:rgba(6, 182, 212, 0.15);
+  --blue:#3B82F6;
+  --blue-glow:rgba(59, 130, 246, 0.15);
+  
+  --radius:24px;
+}
+html[data-theme="light"]{
+  --bg:#F0F6FB; --bg-2:#E0EEFA;
+  --surface:rgba(255, 255, 255, 0.8); --surface-hover:rgba(255, 255, 255, 1);
+  --text:#0F172A; --muted:#5B6B85;
+  --border:rgba(15, 23, 42, 0.08);
+  --header-bg:rgba(240, 246, 251, 0.8);
+  --shadow:0 10px 30px -14px rgba(15, 23, 42, 0.15);
+  --shadow-hover:0 26px 56px -20px rgba(15, 23, 42, 0.25);
+  --ring:rgba(245, 158, 11, 0.3);
+  
+  --gold-glow:rgba(245, 158, 11, 0.1);
+  --cyan-glow:rgba(6, 182, 212, 0.1);
+  --blue-glow:rgba(59, 130, 246, 0.1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; overflow-x:hidden;
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.55; color:var(--text); background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s ease,color .4s ease;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+/* BACKGROUND MESH/ORBS */
+.mesh-bg{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+  background-color:var(--bg);
+}
+.mesh-orb{
+  position:absolute;border-radius:50%;filter:blur(120px);opacity:.4;
+  animation:float 25s ease-in-out infinite;
+}
+html[data-theme="dark"] .mesh-orb{opacity:.25}
+.mesh-orb.m1{width:600px;height:600px;background:radial-gradient(circle,#3B82F6,transparent 70%);top:-200px;left:-200px}
+.mesh-orb.m2{width:500px;height:500px;background:radial-gradient(circle,#F59E0B,transparent 70%);bottom:-150px;right:-100px;animation-delay:-10s}
+.mesh-orb.m3{width:400px;height:400px;background:radial-gradient(circle,#06B6D4,transparent 70%);top:30%;right:10%;animation-delay:-5s}
+
+/* HEADER */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:var(--header-bg);backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid var(--border);
+  transition:background .4s ease;
+}
+.header-inner{
+  max-width:1100px;margin:0 auto;padding:16px 24px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.brand{display:flex;align-items:center;gap:16px}
+/* STYLING LOGO DI HEADER */
+.brand-logo-container{
+  width:48px;height:48px;border-radius:14px;
+  background:#fff; /* Latar putih agar logo transparan tetap jelas */
+  padding:4px;
+  box-shadow:0 8px 16px -6px rgba(0,0,0,0.4);
+  display:grid;place-items:center;
+}
+.brand-logo-container img{
+  width:100%;height:100%;object-fit:contain;
+}
+.brand-title{font-size:1.1rem;font-weight:800;letter-spacing:-.5px}
+.brand-sub{font-size:.75rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:1px}
+
+/* THEME TOGGLE */
+.icon-btn{
+  width:44px;height:44px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--border);
+  display:grid;place-items:center;cursor:pointer;
+  transition:.3s cubic-bezier(.2,.8,.2,1);box-shadow:var(--shadow);
+}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 15px var(--gold-glow)}
+.icon-btn svg{width:20px;height:20px;color:var(--text)}
+.icon-sun{display:none}
+html[data-theme="dark"] .icon-moon{display:none}
+html[data-theme="dark"] .icon-sun{display:block}
+
+/* HERO */
+.hero{max-width:1100px;margin:0 auto;padding:50px 24px 40px;text-align:center}
+
+/* STYLING LOGO BESAR DI TENGAH */
+.hero-logo-wrap{
+  display:flex;justify-content:center;margin-bottom:24px;
+  animation:floatLogo 6s ease-in-out infinite;
+}
+.hero-logo{
+  width:120px;height:auto;
+  filter:drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+}
+html[data-theme="light"] .hero-logo{filter:drop-shadow(0 15px 25px rgba(0,0,0,0.15))}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);background:var(--gold-glow);border:1px solid rgba(245,158,11,.3);
+  margin-bottom:24px;
+}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:pulse 2s infinite}
+.hero-title{
+  font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;
+  margin:0 0 20px;
+  background:linear-gradient(120deg, #F8FAFC 0%, #94A3B8 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-transform: uppercase; /* MEMBUAT JUDUL JADI KAPITAL */
+}
+html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 0%, #5B6B85 100%);-webkit-background-clip:text;background-clip:text;}
+.hero p{max-width:600px;margin:0 auto;color:var(--muted);font-size:1.05rem;font-weight:500}
+
+/* TOOLBAR */
+.toolbar{max-width:1100px;margin:0 auto;padding:0 24px 24px;display:flex;justify-content:flex-end}
+.panduan-btn{
+  padding:12px 24px;border-radius:16px;
+  background:linear-gradient(135deg, var(--gold), #EA580C);
+  color:#fff;font-weight:700;font-size:.9rem;
+  cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 10px 25px -8px rgba(245, 158, 11, 0.5);
+  transition:.3s cubic-bezier(.2,.8,.2,1);
+}
+.panduan-btn:hover{transform:translateY(-3px);box-shadow:0 15px 30px -8px rgba(245, 158, 11, 0.7)}
+.panduan-btn svg{width:18px;height:18px}
+
+/* =========================================
+   GRID 2x2 SIMETRIS (UKURAN SAMA RATA)
+   ========================================= */
+.grid-container{
+  max-width:1000px; /* Lebar dikunci agar kartu terlihat besar & proporsional */
+  margin:0 auto;padding:0 24px 80px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:24px;
+}
+
+/* KARTU */
+.bento-card{
+  position:relative;
+  background:var(--surface);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:36px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  overflow:hidden;cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:all .4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity:0;transform:translateY(30px);
+  animation:cardIn .6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  min-height: 240px; /* Menjaga tinggi kartu tetap lega */
+}
+.bento-card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:var(--shadow-hover);
+  border-color:var(--accent-color);
+  background:var(--surface-hover);
+}
+
+/* Efek Glow di dalam kartu */
+.bento-card::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(circle at top right, var(--accent-glow), transparent 60%);
+  opacity:0;transition:opacity .4s ease;pointer-events:none;z-index:0;
+}
+.bento-card:hover::before{opacity:1}
+
+/* Warna Aksen per Kartu */
+.bento-card[data-accent="cyan"]{--accent-color:var(--cyan);--accent-glow:var(--cyan-glow)}
+.bento-card[data-accent="blue"]{--accent-color:var(--blue);--accent-glow:var(--blue-glow)}
+.bento-card[data-accent="gold"]{--accent-color:var(--gold);--accent-glow:var(--gold-glow)}
+
+/* Ikon Besar & Konten */
+.bento-icon{
+  width:64px;height:64px;border-radius:20px;
+  display:grid;place-items:center;
+  background:var(--bg-2);border:1px solid var(--border);
+  position:relative;z-index:1;margin-bottom:24px;
+  transition:transform .4s ease, background .4s;
+}
+.bento-card:hover .bento-icon{
+  transform:scale(1.1) rotate(-5deg);
+  background:var(--accent-glow);
+  border-color:var(--accent-color);
+}
+.bento-icon svg{width:32px;height:32px;color:var(--accent-color)}
+
+.bento-content{position:relative;z-index:1}
+.bento-title{
+  font-size:1.5rem;font-weight:800;letter-spacing:-.5px;
+  margin:0 0 8px;color:var(--text);
+}
+.bento-desc{
+  font-size:.95rem;color:var(--muted);margin:0;line-height:1.6;max-width:90%;
+}
+
+/* Tombol Panah di sudut */
+.bento-arrow{
+  position:absolute;bottom:32px;right:32px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--bg-2);border:1px solid var(--border);
+  display:grid;place-items:center;z-index:1;
+  transition:all .3s ease;color:var(--muted);
+}
+.bento-card:hover .bento-arrow{
+  background:var(--accent-color);color:var(--bg);
+  transform:translateX(4px) translateY(-4px);
+  box-shadow:0 4px 12px var(--accent-glow);
+}
+
+/* MODAL PANDUAN */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(3, 7, 18, 0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:24px;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-box{
+  max-width:600px;width:100%;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.8);
+  overflow:hidden;display:flex;flex-direction:column;
+  transform:translateY(20px) scale(.95);
+  transition:transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter:blur(20px);
+}
+.modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
+.modal-head{
+  padding:32px 32px 24px;
+  background:linear-gradient(135deg, rgba(245,158,11,0.1), transparent);
+  border-bottom:1px solid var(--border);position:relative;
+}
+.modal-close{
+  position:absolute;top:20px;right:20px;
+  width:36px;height:36px;border-radius:10px;
+  background:var(--bg);border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.2s;
+}
+.modal-close:hover{background:var(--surface-hover);color:var(--gold)}
+.modal-title{font-size:1.4rem;font-weight:800;margin:0 0 6px}
+.modal-sub{font-size:.9rem;color:var(--muted);margin:0}
+.modal-body{padding:24px 32px 32px;overflow-y:auto}
+.modal-list{display:grid;gap:16px;margin-bottom:32px}
+.modal-item{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px;border-radius:16px;
+  background:var(--bg-2);border:1px solid var(--border);
+  transition:border-color .3s;
+}
+.modal-item:hover{border-color:var(--gold)}
+.modal-item-icon{
+  width:40px;height:40px;border-radius:12px;
+  display:grid;place-items:center;flex-shrink:0;
+  background:var(--surface);border:1px solid var(--border);
+}
+.modal-item-icon svg{width:20px;height:20px;color:var(--gold)}
+.modal-item-text h4{margin:0 0 4px;font-size:.95rem;font-weight:700}
+.modal-item-text p{margin:0;font-size:.8rem;color:var(--muted);line-height:1.5}
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px;border-radius:16px;
+  background:linear-gradient(135deg, #10B981, #059669);
+  color:#fff;font-weight:700;font-size:.95rem;
+  box-shadow:0 10px 20px -8px rgba(16,185,129,0.5);
+  transition:.3s;
+}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 15px 25px -8px rgba(16,185,129,0.7)}
+.wa-btn svg{width:20px;height:20px}
+
+/* FOOTER */
+.footer{
+  border-top:1px solid var(--border);padding:32px 24px;
+  text-align:center;font-size:.8rem;color:var(--muted);
+}
+.footer strong{color:var(--text)}
+
+/* ANIMASI */
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,15px) scale(.98)}}
+@keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(245,158,11,0.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(245,158,11,0)}}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .grid-container{grid-template-columns:1fr;gap:20px;padding:0 20px 60px;}
+  .hero{padding:40px 20px 30px;}
+  .hero-logo{width:100px;}
+  .toolbar{justify-content:center;padding:0 20px 20px;}
+  .header-inner{padding:12px 16px;}
+  .brand-sub{display:none;}
+  .modal-head, .modal-body{padding:24px 20px;}
+  .bento-card{padding:28px; min-height: 220px;}
+  .bento-arrow{bottom:24px;right:24px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Background Mesh -->
+<div class="mesh-bg">
+  <div class="mesh-orb m1"></div>
+  <div class="mesh-orb m2"></div>
+  <div class="mesh-orb m3"></div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <!-- LOGO DI HEADER -->
+      <div class="brand-logo-container">
+        <img src="https://raw.githubusercontent.com/Mrdaybee/logo-sekolah/main/logo-sekolah-smp.png" alt="Logo SMP Bhakti Pertiwi" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23F59E0B\' stroke-width=\'2\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M12 8v8M8 12h8\'/></svg>'">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">SMP Bhakti Pertiwi</div>
+        <div class="brand-sub">Portal Aplikasi</div>
+      </div>
+    </div>
+    <button class="icon-btn" id="themeBtn" aria-label="Ganti Tema">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <!-- LOGO BESAR DI TENGAH -->
+  <div class="hero-logo-wrap">
+    <img src="https://raw.githubusercontent.com/Mrdaybee/logo-sekolah/main/logo-sekolah-smp.png" alt="Logo SMP Bhakti Pertiwi" class="hero-logo" onerror="this.style.display='none'">
+  </div>
+
+  <div class="eyebrow"><span class="eyebrow-dot"></span>Akses Cepat & Terpadu</div>
+  <h1 class="hero-title">PORTAL INTERNAL<br>SMP BHAKTI PERTIWI</h1>
+  <p>Satu pintu untuk mengelola jurnal kebiasaan, penerimaan siswa baru, dan administrasi kepegawaian.</p>
+</section>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <button class="panduan-btn" id="panduanBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+    Panduan Portal
+  </button>
+</div>
+
+<!-- Grid 2x2 Simetris -->
+<section class="grid-container" id="bentoGrid">
+  
+  <!-- Card 1: Jurnal 7 KAIH -->
+  <a href="https://script.google.com/macros/s/AKfycbwoy_tAiDWwgl_sHD7mDIKf_ejq8Nb862oGod0n6l0aQ0dEe9-Y_f5b0Q836qNXNVI/exec" target="_blank" class="bento-card" data-accent="cyan" style="animation-delay:0.1s">
+    <div class="bento-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">Jurnal 7 KAIH</h2>
+      <p class="bento-desc">Media pencatatan harian untuk membentuk 7 kebiasaan positif anak Indonesia hebat.</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <!-- Card 2: Daftar Tunggu SPMB -->
+  <a href="https://script.google.com/macros/s/AKfycbxXD9K0se9wKo_2FTajR4ngQY-EGBJT9WG629t_44LNi_OGDAzCspvAxog5J5Z_nO4AGQ/exec" target="_blank" class="bento-card" data-accent="blue" style="animation-delay:0.2s">
+    <div class="bento-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">Daftar Tunggu SPMB</h2>
+      <p class="bento-desc">Formulir pendaftaran awal (waiting list) siswa baru tahun ajaran 2027/2028.</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <!-- Card 3: SPMB 2027/2028 -->
+  <a href="https://script.google.com/macros/s/AKfycbyqdTdrmnY-_6QWjDWfFj7OGdUq-SOl7ObqyX4y2sM8g3yZROqXr2lCTZg6_QrpLDY8Lw/exec" target="_blank" class="bento-card" data-accent="gold" style="animation-delay:0.3s">
+    <div class="bento-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">SPMB 2027/2028</h2>
+      <p class="bento-desc">Formulir pendaftaran utama siswa baru (Jalur Inden, Prestasi, Reguler, Mandiri).</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <!-- Card 4: Absensi Guru -->
+  <a href="https://script.google.com/macros/s/AKfycbznUrH8dnzazxuFeucywGxb8cpC6UXb-nZ4uqQcOKxRFOdDG8_tYBNoN9os4WqE0qqe/exec" target="_blank" class="bento-card" data-accent="cyan" style="animation-delay:0.4s">
+    <div class="bento-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">Absensi Guru</h2>
+      <p class="bento-desc">Sistem presensi kehadiran guru harian secara terpusat dan efisien.</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  © 2026 <strong>SMP Bhakti Pertiwi</strong>. Portal Aplikasi Internal.
+</footer>
+
+<!-- Modal Panduan -->
+<div class="modal-overlay" id="panduanModal" role="dialog" aria-modal="true" aria-labelledby="panduanTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <button class="modal-close" id="closePanduan" aria-label="Tutup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <h2 class="modal-title" id="panduanTitle">Panduan Portal</h2>
+      <p class="modal-sub">Pahami fungsi setiap aplikasi di bawah ini.</p>
+    </div>
+    <div class="modal-body">
+      <div class="modal-list">
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>Jurnal 7 KAIH</h4>
+            <p>Membantu siswa mencatat 7 kebiasaan positif harian (bangun pagi, ibadah, olahraga, makan sehat, belajar, bermasyarakat, tidur cepat).</p>
+          </div>
+        </div>
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>Daftar Tunggu SPMB</h4>
+            <p>Pendaftaran awal untuk masuk daftar tunggu penerimaan siswa baru tahun ajaran 2027/2028.</p>
+          </div>
+        </div>
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>SPMB 2027/2028</h4>
+            <p>Formulir pendaftaran resmi siswa baru untuk semua jalur (Inden, Prestasi, Reguler, Mandiri).</p>
+          </div>
+        </div>
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>Absensi Guru</h4>
+            <p>Pencatatan presensi harian guru (jam masuk, pulang, izin, cuti) secara terpusat.</p>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/6281234567890" target="_blank" class="wa-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Hubungi Admin via WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var themeBtn = document.getElementById('themeBtn');
+  var panduanBtn = document.getElementById('panduanBtn');
+  var modal = document.getElementById('panduanModal');
+  var closeBtn = document.getElementById('closePanduan');
+
+  // Toggle Theme
+  themeBtn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+
+  // Modal Logic
+  function openModal(){
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    panduanBtn.focus();
+  }
+
+  panduanBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+})();
+</script>
+</body>
+</html>
