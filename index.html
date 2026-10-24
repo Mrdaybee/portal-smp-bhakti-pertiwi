@@ -167,7 +167,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 .panduan-btn svg{width:18px;height:18px}
 
 /* =========================================
-   GRID 2x2 SIMETRIS (UKURAN SAMA RATA)
+   GRID 2 KOLOM SIMETRIS
    ========================================= */
 .grid-container{
   max-width:1000px; /* Lebar dikunci agar kartu terlihat besar & proporsional */
@@ -192,11 +192,6 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   opacity:0;transform:translateY(30px);
   animation:cardIn .6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   min-height: 240px; /* Menjaga tinggi kartu tetap lega */
-}
-
-/* KARTU MELEBAR (UNTUK KARTU KE-5) */
-.bento-card.span-2{
-  grid-column: span 2;
 }
 
 .bento-card:hover{
@@ -333,7 +328,6 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 /* RESPONSIVE */
 @media(max-width:768px){
   .grid-container{grid-template-columns:1fr;gap:20px;padding:0 20px 60px;}
-  .bento-card.span-2 {grid-column: span 1;} /* Reset span di mobile */
   .hero{padding:40px 20px 30px;}
   .hero-logo{width:100px;}
   .toolbar{justify-content:center;padding:0 20px 20px;}
@@ -397,7 +391,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </button>
 </div>
 
-<!-- Grid 2x2 Simetris -->
+<!-- Grid 2 Kolom Simetris -->
 <section class="grid-container" id="bentoGrid">
   
   <!-- Card 1: Jurnal 7 KAIH -->
@@ -456,8 +450,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
     </div>
   </a>
 
-  <!-- Card 5: Jurnal Penghargaan Murid (Span 2) -->
-  <a href="https://script.google.com/macros/s/AKfycbz3g2kOW0m9vlvS3Xl9MiqnDSRHetdeEzeFMrcAD5ifjXeB4UvLgi9FiNmPzpbjuARbqQ/exec" target="_blank" class="bento-card span-2" data-accent="gold" style="animation-delay:0.5s">
+  <!-- Card 5: Jurnal Penghargaan Murid -->
+  <a href="https://script.google.com/macros/s/AKfycbz3g2kOW0m9vlvS3Xl9MiqnDSRHetdeEzeFMrcAD5ifjXeB4UvLgi9FiNmPzpbjuARbqQ/exec" target="_blank" class="bento-card" data-accent="gold" style="animation-delay:0.5s">
     <div class="bento-icon">
       <!-- Trophy Icon -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
@@ -465,6 +459,21 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
     <div class="bento-content">
       <h2 class="bento-title">Jurnal Penghargaan Murid</h2>
       <p class="bento-desc">Sistem pencatatan dan apresiasi atas prestasi serta perilaku positif murid.</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
+  <!-- Card 6: Jurnal Pembinaan Murid (BARU) -->
+  <a href="https://script.google.com/macros/s/AKfycbyZG0BQap5hwuxEAJBnM0ntwsFGzherdYZ8BcBhs02F66XQeoTapWGh98EogH1G7jl5/exec" target="_blank" class="bento-card" data-accent="blue" style="animation-delay:0.6s">
+    <div class="bento-icon">
+      <!-- User Check Icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">Jurnal Pembinaan Murid</h2>
+      <p class="bento-desc">Sistem pencatatan dan monitoring pembinaan karakter serta kedisiplinan murid.</p>
     </div>
     <div class="bento-arrow">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -526,7 +535,6 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
             <p>Pencatatan presensi harian guru (jam masuk, pulang, izin, cuti) secara terpusat.</p>
           </div>
         </div>
-        <!-- Item Baru di Modal -->
         <div class="modal-item">
           <div class="modal-item-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
@@ -536,8 +544,18 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
             <p>Sistem pencatatan dan apresiasi atas prestasi serta perilaku positif murid.</p>
           </div>
         </div>
+        <!-- Item Baru di Modal -->
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>Jurnal Pembinaan Murid</h4>
+            <p>Pencatatan dan monitoring pembinaan karakter serta kedisiplinan murid secara terpusat.</p>
+          </div>
+        </div>
       </div>
-      <a href="https://wa.me/6281234567890" target="_blank" class="wa-btn">
+      <a href="https://wa.me/628977777170" target="_blank" class="wa-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         Hubungi Admin via WhatsApp
       </a>
