@@ -193,6 +193,12 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   animation:cardIn .6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   min-height: 240px; /* Menjaga tinggi kartu tetap lega */
 }
+
+/* KARTU MELEBAR (UNTUK KARTU KE-5) */
+.bento-card.span-2{
+  grid-column: span 2;
+}
+
 .bento-card:hover{
   transform:translateY(-8px) scale(1.02);
   box-shadow:var(--shadow-hover);
@@ -327,6 +333,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 /* RESPONSIVE */
 @media(max-width:768px){
   .grid-container{grid-template-columns:1fr;gap:20px;padding:0 20px 60px;}
+  .bento-card.span-2 {grid-column: span 1;} /* Reset span di mobile */
   .hero{padding:40px 20px 30px;}
   .hero-logo{width:100px;}
   .toolbar{justify-content:center;padding:0 20px 20px;}
@@ -449,6 +456,21 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
     </div>
   </a>
 
+  <!-- Card 5: Jurnal Penghargaan Murid (Span 2) -->
+  <a href="https://script.google.com/macros/s/AKfycbz3g2kOW0m9vlvS3Xl9MiqnDSRHetdeEzeFMrcAD5ifjXeB4UvLgi9FiNmPzpbjuARbqQ/exec" target="_blank" class="bento-card span-2" data-accent="gold" style="animation-delay:0.5s">
+    <div class="bento-icon">
+      <!-- Trophy Icon -->
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+    </div>
+    <div class="bento-content">
+      <h2 class="bento-title">Jurnal Penghargaan Murid</h2>
+      <p class="bento-desc">Sistem pencatatan dan apresiasi atas prestasi serta perilaku positif murid.</p>
+    </div>
+    <div class="bento-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>
+  </a>
+
 </section>
 
 <!-- Footer -->
@@ -502,6 +524,16 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
           <div class="modal-item-text">
             <h4>Absensi Guru</h4>
             <p>Pencatatan presensi harian guru (jam masuk, pulang, izin, cuti) secara terpusat.</p>
+          </div>
+        </div>
+        <!-- Item Baru di Modal -->
+        <div class="modal-item">
+          <div class="modal-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          </div>
+          <div class="modal-item-text">
+            <h4>Jurnal Penghargaan Murid</h4>
+            <p>Sistem pencatatan dan apresiasi atas prestasi serta perilaku positif murid.</p>
           </div>
         </div>
       </div>
