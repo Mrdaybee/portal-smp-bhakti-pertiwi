@@ -90,7 +90,7 @@ html[data-theme="dark"] .mesh-orb{opacity:.25}
   transition:background .4s ease;
 }
 .header-inner{
-  max-width:1100px;margin:0 auto;padding:16px 24px;
+  max-width:1200px;margin:0 auto;padding:16px 24px;
   display:flex;justify-content:space-between;align-items:center;
 }
 .brand{display:flex;align-items:center;gap:16px}
@@ -122,7 +122,7 @@ html[data-theme="dark"] .icon-moon{display:none}
 html[data-theme="dark"] .icon-sun{display:block}
 
 /* HERO */
-.hero{max-width:1100px;margin:0 auto;padding:50px 24px 40px;text-align:center}
+.hero{max-width:1200px;margin:0 auto;padding:50px 24px 40px;text-align:center}
 
 /* STYLING LOGO BESAR DI TENGAH */
 .hero-logo-wrap{
@@ -154,7 +154,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 .hero p{max-width:600px;margin:0 auto;color:var(--muted);font-size:1.05rem;font-weight:500}
 
 /* TOOLBAR */
-.toolbar{max-width:1100px;margin:0 auto;padding:0 24px 24px;display:flex;justify-content:flex-end}
+.toolbar{max-width:1200px;margin:0 auto;padding:0 24px 24px;display:flex;justify-content:flex-end}
 .panduan-btn{
   padding:12px 24px;border-radius:16px;
   background:linear-gradient(135deg, var(--gold), #EA580C);
@@ -167,13 +167,13 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 .panduan-btn svg{width:18px;height:18px}
 
 /* =========================================
-   GRID 2 KOLOM SIMETRIS
+   GRID 3 KOLOM (FLEKSIBEL)
    ========================================= */
 .grid-container{
-  max-width:1000px; /* Lebar dikunci agar kartu terlihat besar & proporsional */
+  max-width:1200px; /* Lebar maksimal diperbesar untuk 3 kolom */
   margin:0 auto;padding:0 24px 80px;
   display:grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3 Kolom di Desktop */
   gap:24px;
 }
 
@@ -184,7 +184,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:36px;
+  padding:32px; /* Padding sedikit disesuaikan untuk 3 kolom */
   display:flex;flex-direction:column;justify-content:space-between;
   overflow:hidden;cursor:pointer;
   box-shadow:var(--shadow);
@@ -215,13 +215,13 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 .bento-card[data-accent="gold"]{--accent-color:var(--gold);--accent-glow:var(--gold-glow)}
 
 /* =========================================
-   IKON & ANIMASI MOTION (REVISI)
+   IKON & ANIMASI MOTION
    ========================================= */
 .bento-icon{
-  width:64px;height:64px;border-radius:20px;
+  width:60px;height:60px;border-radius:20px;
   display:grid;place-items:center;
   background:var(--bg-2);border:1px solid var(--border);
-  position:relative;z-index:1;margin-bottom:24px;
+  position:relative;z-index:1;margin-bottom:20px;
   transition:all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek spring/bouncy */
 }
 
@@ -233,7 +233,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   animation: floatIcon 2.5s ease-in-out infinite; /* Animasi melayang */
 }
 .bento-icon svg{
-  width:32px;height:32px;color:var(--accent-color);
+  width:28px;height:28px;color:var(--accent-color);
   transition: transform 0.3s ease;
 }
 .bento-card:hover .bento-icon svg {
@@ -242,17 +242,17 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 
 .bento-content{position:relative;z-index:1}
 .bento-title{
-  font-size:1.5rem;font-weight:800;letter-spacing:-.5px;
+  font-size:1.25rem;font-weight:800;letter-spacing:-.5px;
   margin:0 0 8px;color:var(--text);
 }
 .bento-desc{
-  font-size:.95rem;color:var(--muted);margin:0;line-height:1.6;max-width:90%;
+  font-size:.9rem;color:var(--muted);margin:0;line-height:1.5;max-width:95%;
 }
 
 /* Tombol Panah di sudut */
 .bento-arrow{
-  position:absolute;bottom:32px;right:32px;
-  width:44px;height:44px;border-radius:50%;
+  position:absolute;bottom:28px;right:28px;
+  width:40px;height:40px;border-radius:50%;
   background:var(--bg-2);border:1px solid var(--border);
   display:grid;place-items:center;z-index:1;
   transition:all .4s cubic-bezier(0.34, 1.56, 0.64, 1);color:var(--muted);
@@ -417,7 +417,13 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 }
 
 /* RESPONSIVE */
+@media(max-width:1024px){
+  /* 2 Kolom untuk Tablet */
+  .grid-container { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media(max-width:768px){
+  /* 1 Kolom untuk HP */
   .grid-container{grid-template-columns:1fr;gap:20px;padding:0 20px 60px;}
   .hero{padding:40px 20px 30px;}
   .hero-logo{width:100px;}
@@ -484,7 +490,7 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </button>
 </div>
 
-<!-- Grid 2 Kolom Simetris -->
+<!-- Grid 3 Kolom -->
 <section class="grid-container" id="bentoGrid">
   
   <!-- Card 1: Jurnal 7 KAIH -->
