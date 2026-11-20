@@ -146,11 +146,19 @@ html[data-theme="light"] .hero-logo{filter:drop-shadow(0 15px 25px rgba(0,0,0,0.
 .hero-title{
   font-size:clamp(2rem,5vw,3.5rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;
   margin:0 0 20px;
-  background:linear-gradient(120deg, #F8FAFC 0%, #94A3B8 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-transform: uppercase; /* MEMBUAT JUDUL JADI KAPITAL */
+  background:linear-gradient(120deg, var(--gold) 0%, var(--cyan) 50%, var(--blue) 100%, var(--gold) 200%);
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:heroShine 3s ease-in-out infinite;
 }
-html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 0%, #5B6B85 100%);-webkit-background-clip:text;background-clip:text;}
+
+@keyframes heroShine{
+  0%{background-position:200% 0;}
+  50%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 0%, #5B6B85 100%, #0F172A 200%);-webkit-background-clip:text;background-clip:text;background-size:200% auto;animation:heroShine 3s ease-in-out infinite;}
 .hero p{max-width:600px;margin:0 auto;color:var(--muted);font-size:1.05rem;font-weight:500}
 
 /* TOOLBAR */
@@ -165,6 +173,58 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
 }
 .panduan-btn:hover{transform:translateY(-3px);box-shadow:0 15px 30px -8px rgba(245, 158, 11, 0.7)}
 .panduan-btn svg{width:18px;height:18px}
+
+  /* FILTER BAR */
+  .role-filter-bar {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 0 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .filter-tab {
+    padding: 8px 16px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+  }
+  .filter-tab:hover {
+    color: var(--text);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .filter-tab.active {
+    background: linear-gradient(135deg, var(--gold), #EA580C);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.5);
+  }
+
+  /* CARD ROLE BADGE */
+  .card-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--accent-color);
+    z-index: 2;
+  }
 
 /* =========================================
    GRID 3 KOLOM (FLEKSIBEL)
@@ -482,19 +542,20 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   <p>Satu pintu untuk mengelola jurnal kebiasaan, penerimaan siswa baru, dan administrasi kepegawaian.</p>
 </section>
 
-<!-- Toolbar -->
-<div class="toolbar">
-  <button class="panduan-btn" id="panduanBtn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-    Panduan Portal
-  </button>
+<!-- Filter Peran / Kategori -->
+<div class="role-filter-bar">
+  <button class="filter-tab active" data-filter="ortu">Orang Tua</button>
+  <button class="filter-tab" data-filter="guru">Guru / Pegawai</button>
+  <button class="filter-tab" data-filter="murid">Murid / Siswa</button>
+  <button class="filter-tab" id="panduanBtn">Panduan</button>
 </div>
 
 <!-- Grid 3 Kolom -->
 <section class="grid-container" id="bentoGrid">
-  
+
   <!-- Card 1: Jurnal 7 KAIH -->
-  <a href="https://script.google.com/macros/s/AKfycbwoy_tAiDWwgl_sHD7mDIKf_ejq8Nb862oGod0n6l0aQ0dEe9-Y_f5b0Q836qNXNVI/exec" target="_blank" class="bento-card" data-accent="cyan" style="animation-delay:0.1s">
+  <a href="https://script.google.com/macros/s/AKfycbwoy_tAiDWwgl_sHD7mDIKf_ejq8Nb862oGod0n6l0aQ0dEe9-Y_f5b0Q836qNXNVI/exec" target="_blank" class="bento-card" data-role="ortu" data-accent="gold" style="animation-delay:0.1s">
+    <div class="card-badge">Orang Tua</div>
     <div class="bento-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
     </div>
@@ -508,7 +569,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 2: Daftar Tunggu SPMB -->
-  <a href="https://script.google.com/macros/s/AKfycbxXD9K0se9wKo_2FTajR4ngQY-EGBJT9WG629t_44LNi_OGDAzCspvAxog5J5Z_nO4AGQ/exec" target="_blank" class="bento-card" data-accent="blue" style="animation-delay:0.2s">
+  <a href="https://script.google.com/macros/s/AKfycbxXD9K0se9wKo_2FTajR4ngQY-EGBJT9WG629t_44LNi_OGDAzCspvAxog5J5Z_nO4AGQ/exec" target="_blank" class="bento-card" data-role="ortu" data-accent="gold" style="animation-delay:0.2s">
+    <div class="card-badge">Orang Tua</div>
     <div class="bento-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     </div>
@@ -522,7 +584,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 3: SPMB 2027/2028 -->
-  <a href="https://script.google.com/macros/s/AKfycbyqdTdrmnY-_6QWjDWfFj7OGdUq-SOl7ObqyX4y2sM8g3yZROqXr2lCTZg6_QrpLDY8Lw/exec" target="_blank" class="bento-card" data-accent="gold" style="animation-delay:0.3s">
+  <a href="https://script.google.com/macros/s/AKfycbyqdTdrmnY-_6QWjDWfFj7OGdUq-SOl7ObqyX4y2sM8g3yZROqXr2lCTZg6_QrpLDY8Lw/exec" target="_blank" class="bento-card" data-role="ortu" data-accent="gold" style="animation-delay:0.3s">
+    <div class="card-badge">Orang Tua</div>
     <div class="bento-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     </div>
@@ -536,7 +599,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 4: Absensi Guru -->
-  <a href="https://script.google.com/macros/s/AKfycbznUrH8dnzazxuFeucywGxb8cpC6UXb-nZ4uqQcOKxRFOdDG8_tYBNoN9os4WqE0qqe/exec" target="_blank" class="bento-card" data-accent="cyan" style="animation-delay:0.4s">
+  <a href="https://script.google.com/macros/s/AKfycbznUrH8dnzazxuFeucywGxb8cpC6UXb-nZ4uqQcOKxRFOdDG8_tYBNoN9os4WqE0qqe/exec" target="_blank" class="bento-card" data-role="guru" data-accent="cyan" style="animation-delay:0.4s">
+    <div class="card-badge">Guru & Staf</div>
     <div class="bento-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg>
     </div>
@@ -550,7 +614,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 5: Jurnal Penghargaan Murid -->
-  <a href="https://script.google.com/macros/s/AKfycbz3g2kOW0m9vlvS3Xl9MiqnDSRHetdeEzeFMrcAD5ifjXeB4UvLgi9FiNmPzpbjuARbqQ/exec" target="_blank" class="bento-card" data-accent="gold" style="animation-delay:0.5s">
+  <a href="https://script.google.com/macros/s/AKfycbz3g2kOW0m9vlvS3Xl9MiqnDSRHetdeEzeFMrcAD5ifjXeB4UvLgi9FiNmPzpbjuARbqQ/exec" target="_blank" class="bento-card" data-role="murid" data-accent="blue" style="animation-delay:0.5s">
+    <div class="card-badge">Murid</div>
     <div class="bento-icon">
       <!-- Trophy Icon -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
@@ -565,7 +630,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 6: Jurnal Pembinaan Murid -->
-  <a href="https://script.google.com/macros/s/AKfycbyZG0BQap5hwuxEAJBnM0ntwsFGzherdYZ8BcBhs02F66XQeoTapWGh98EogH1G7jl5/exec" target="_blank" class="bento-card" data-accent="blue" style="animation-delay:0.6s">
+  <a href="https://script.google.com/macros/s/AKfycbyZG0BQap5hwuxEAJBnM0ntwsFGzherdYZ8BcBhs02F66XQeoTapWGh98EogH1G7jl5/exec" target="_blank" class="bento-card" data-role="murid" data-accent="blue" style="animation-delay:0.6s">
+    <div class="card-badge">Murid</div>
     <div class="bento-icon">
       <!-- User Check Icon -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
@@ -580,7 +646,8 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   </a>
 
   <!-- Card 7: Aplikasi Input Nilai Rapor -->
-  <a href="https://script.google.com/macros/s/AKfycbyxWsLwA1wuSRMrpkspkQH-dhciYEy87F4b6hSfoml-glMlJQPeywUDCgueeB9ZekYeEA/exec" target="_blank" class="bento-card" data-accent="cyan" style="animation-delay:0.7s">
+  <a href="https://script.google.com/macros/s/AKfycbyxWsLwA1wuSRMrpkspkQH-dhciYEy87F4b6hSfoml-glMlJQPeywUDCgueeB9ZekYeEA/exec" target="_blank" class="bento-card" data-role="guru" data-accent="cyan" style="animation-delay:0.7s">
+    <div class="card-badge">Guru & Staf</div>
     <div class="bento-icon">
       <!-- File Text / Clipboard Icon -->
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M9 10h6"/></svg>
@@ -811,6 +878,36 @@ html[data-theme="light"] .hero-title{background:linear-gradient(120deg, #0F172A 
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // Filter Peran / Kategori Pengguna (Default ke 'ortu')
+  var filterTabs = document.querySelectorAll('.filter-tab');
+  var bentoCards = document.querySelectorAll('.bento-card');
+
+  // Set initial state (show 'ortu' cards by default)
+  bentoCards.forEach(function(card){
+    if(card.getAttribute('data-role') === 'ortu'){
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  filterTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      filterTabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var filter = tab.getAttribute('data-filter');
+
+      bentoCards.forEach(function(card){
+        if(card.getAttribute('data-role') === filter){
+          card.style.display = 'flex';
+          card.style.animation = 'cardIn .5s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
   });
 })();
 </script>
