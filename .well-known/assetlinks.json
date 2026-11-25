@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.smpbhaktipertiwi.twa",
+      "sha256_cert_fingerprints": ["7D:8C:9B:3F:25:EE:33:18:85:F1:E6:5D:AF:78:C5:45:26:DD:0B:1A:51:C5:80:07:81:87:34:70:B8:0F:BA:9B"]
+    }
+  }
+]
